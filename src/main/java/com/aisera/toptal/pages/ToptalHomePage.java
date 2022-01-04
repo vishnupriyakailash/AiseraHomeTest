@@ -9,23 +9,19 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 
-public class ToptalHomePage {
+import com.aisera.ui.framework.BasePage;
 
-	WebDriver driver;
+public class ToptalHomePage extends BasePage {
 
 	private final Logger logger = LogManager.getLogger(ToptalHomePage.class);
 
 	public ToptalHomePage(WebDriver driver) {
-		this.driver = driver;
-		
+		super(driver);
+
 	}
 
 	@FindBy(linkText = APPLY_LINK)
 	WebElement applyLink;
-
-	public String getCurrentUrl() {
-		return driver.getCurrentUrl();
-	}
 
 	public void clickApplyAsFreelancerLink() {
 		logger.info("clicking Apply as a Freelancer link");
@@ -35,7 +31,7 @@ public class ToptalHomePage {
 
 	public ToptalApplyPage clickApplyAsFreelancerLinkReturnApplyPage() {
 		clickApplyAsFreelancerLink();
-		return PageFactory.initElements(this.driver, ToptalApplyPage.class);
+		return new ToptalApplyPage(driver);
 
 	}
 

@@ -20,6 +20,8 @@ public class BrowserInitializer {
 
 	private Properties properties = new Properties();
 
+	private WebDriver driver;
+
 	private final Logger logger = LogManager.getLogger(BrowserInitializer.class);
 
 	public BrowserInitializer() {
@@ -30,10 +32,11 @@ public class BrowserInitializer {
 		properties = readConfigFile(Constants.CONFIG_FILE_PATH);
 		config.setTimeOut(Integer.parseInt(properties.getProperty("timeout")));
 		config.setBrowser(properties.getProperty("browser"));
+		driver = getWebDriver(config.getBrowser());
 	}
 
 	public WebDriver getWebDriver() {
-		return getWebDriver(config.getBrowser());
+		return this.driver;
 	}
 
 	private WebDriver getWebDriver(String browser) {

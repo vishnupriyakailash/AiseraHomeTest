@@ -9,7 +9,6 @@ import static com.aisera.utils.Constants.PASSWORD;
 import static com.aisera.utils.Constants.TALENT_ITEM;
 import static com.aisera.utils.Constants.TALENT_KIND_ITEMS;
 import static com.aisera.utils.Constants.TALENT_KIND_SELECT;
-import static com.aisera.utils.Constants.TOPTAL_URL;
 
 import java.util.Iterator;
 import java.util.List;
@@ -17,20 +16,18 @@ import java.util.List;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.openqa.selenium.By;
-import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
-import org.openqa.selenium.support.ui.ExpectedConditions;
 
-public class ToptalApplyPage {
+import com.aisera.ui.framework.BasePage;
 
-	WebDriver driver;
+public class ToptalApplyPage extends BasePage {
 
 	private final Logger logger = LogManager.getLogger(ToptalApplyPage.class);
 
 	public ToptalApplyPage(WebDriver driver) {
-		this.driver = driver;
+		super(driver);
 	}
 
 	@FindBy(id = FULL_NAME)
@@ -57,48 +54,32 @@ public class ToptalApplyPage {
 	@FindBy(className = COOKIE_POLICY_ACCEPT)
 	WebElement cookiePolicyAccept;
 
-	public String getCurrentUrl() {
-		return driver.getCurrentUrl();
-	}
-
-	public boolean isPageOpened() {
-		return driver.getCurrentUrl().startsWith(TOPTAL_URL);
-	}
-
+	
 	public void setFullName(String fullname) {
 		logger.info("Entering full name");
-		scrollElementIntoView(fullName);
-		fullName.clear();
-		fullName.sendKeys(fullname);
+		enterInputField(this.fullName, fullname);
 	}
 
 	public void setEmail(String emailId) {
 		logger.info("Entering email");
-		scrollElementIntoView(email);
-		email.clear();
-		email.sendKeys(emailId);
+		enterInputField(this.email, emailId);
 	}
 
 	public void setPassword(String pwd) {
 		logger.info("Entering password");
-		scrollElementIntoView(password);
-		password.clear();
-		password.sendKeys(pwd);
+		enterInputField(this.password, pwd);
 	}
 
 	public void setConfirmPassword(String cfmPwd) {
 		logger.info("Entering confirm password");
-		scrollElementIntoView(confirmPassword);
-		confirmPassword.clear();
-		confirmPassword.sendKeys(cfmPwd);
+		enterInputField(this.confirmPassword, cfmPwd);
 	}
 
 	public void selectTalentKind(String type) {
 
 		logger.info("Selecting talent type");
-		scrollElementIntoView(talentKind);
-		talentKind.click();
-		ExpectedConditions.visibilityOfAllElements(talentKindItems);
+		clickLink(talentKind);
+		waitForElementsToAppear(talentKindItems);
 		List<WebElement> options = driver.findElements(By.cssSelector(TALENT_ITEM));
 		Iterator<WebElement> it = options.iterator();
 		while (it.hasNext()) {
@@ -114,8 +95,7 @@ public class ToptalApplyPage {
 
 	public void clickOnJoin() {
 		logger.info("Clicking Join button");
-		scrollElementIntoView(submit);
-		submit.click();
+		clickLink(submit);
 	}
 
 	public void acceptCookiePolicy() {
@@ -127,12 +107,7 @@ public class ToptalApplyPage {
 		}
 
 	}
-
-	private void scrollElementIntoView(WebElement element) {
-		JavascriptExecutor jsExecutor = (JavascriptExecutor) this.driver;
-		jsExecutor.executeScript("arguments[0].scrollIntoView();", element);
-	}
-
+	
 	public void fillDetails(String type, String fullName, String email, String password, String confirmPassword) {
 		selectTalentKind(type);
 		setFullName(fullName);

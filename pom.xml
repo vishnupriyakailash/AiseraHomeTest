@@ -13,6 +13,9 @@
 		<webdrivermanager.version>5.0.3</webdrivermanager.version>
 		<testng.version>6.9.10</testng.version>
 		<log4j.version>2.17.1</log4j.version>
+		<java.version>1.8</java.version>
+		<surefire-version>2.22.2</surefire-version>
+		<testNgSuiteFile>suite/testsuite.xml</testNgSuiteFile>
 	</properties>
 
 	<dependencies>
@@ -48,6 +51,28 @@
 
 
 	</dependencies>
+	<build>
+		<plugins>
+			<plugin>
+				<artifactId>maven-compiler-plugin</artifactId>
+				<configuration>
+					<source>${java.version}</source>
+					<target>${java.version}</target>
+				</configuration>
+			</plugin>
+			<plugin>
+				<artifactId>maven-surefire-plugin</artifactId>
+				<version>${surefire-version}</version>
+				<configuration>
+					<suiteXmlFiles>
+						<suiteXmlFile>${testNgSuiteFile}</suiteXmlFile>
+					</suiteXmlFiles>
+				</configuration>
+			</plugin>
+		</plugins>
+
+
+	</build>
 
 
 </project>

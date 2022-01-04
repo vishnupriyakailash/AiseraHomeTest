@@ -1,0 +1,13 @@
+<!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd" >
+<suite name="HomeTest" verbose="1" parallel="false" thread-count="1">
+	<test name="GoogleHome">
+		<classes>
+			<class name="com.aisera.google.GoogleHomeTest"></class>
+		</classes>
+	</test>
+	<test name="ToptalApplyTest">
+		<classes>
+			<class name="com.aisera.toptal.ToptalApplyTest"></class>
+		</classes>
+	</test>
+</suite>
