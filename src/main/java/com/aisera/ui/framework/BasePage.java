@@ -9,11 +9,10 @@ import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.pagefactory.AjaxElementLocatorFactory;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
+import static com.aisera.utils.Constants.*;
 
 public class BasePage {
 
-	private static final int TIMEOUT = 10;
-	private static final int POLLING = 100;
 
 	protected WebDriver driver;
 	private WebDriverWait wait;

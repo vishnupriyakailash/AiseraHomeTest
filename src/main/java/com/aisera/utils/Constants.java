@@ -61,5 +61,12 @@ public class Constants {
 
 	// Toptal Apply Page Talent Kind custom Item
 	public static final String TALENT_ITEM = ".custom_select-options_item";
+	
+	//Default timeout
+	public static final int TIMEOUT = 10;
+	
+	//polling interval
+	public static final int POLLING = 100;
+
 
 }
