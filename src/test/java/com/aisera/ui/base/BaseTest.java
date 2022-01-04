@@ -17,14 +17,14 @@ public class BaseTest {
 	protected WebDriver driver = null;
 
 	@BeforeClass
-	public void beforeSuite() {
+	public void getDriver() {
 		logger.info("Getting the driver object");
 		driver = factory.getInitialzer().getWebDriver();
 
 	}
 
 	@AfterSuite
-	public void afterSuite() {
+	public void tearDown() {
 		logger.info("Closing the browser");
 		 driver.quit();
 	}
